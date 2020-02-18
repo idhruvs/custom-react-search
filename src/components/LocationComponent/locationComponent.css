@@ -1,0 +1,31 @@
+.LocationSection {
+  display: flex;
+  flex-direction: row;
+  margin-top: 5vh;
+  width: 400px;
+}
+
+.LocationIcon {
+  width: 100px;
+  height: 100px;
+}
+
+.LocationWrapper {
+  padding: 16px 0px;
+}
+
+.LocationName {
+  font-size: 18px;
+}
+
+.PositionWrapper {
+  display: flex;
+}
+
+.PositionWrapper p {
+  padding: 0px 10px;
+}
+
+.PositionIndicator {
+  padding-right: 16px;
+}

@@ -2,6 +2,8 @@
   "name": "custom-search-react",
   "version": "0.1.0",
   "private": true,
+  "author": "Dhrvuv Shah",
+  "repository": "https://github.io/idhruvs/react-custom-search.git",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
