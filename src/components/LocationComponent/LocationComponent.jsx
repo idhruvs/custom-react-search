@@ -3,25 +3,19 @@ import locationIcon from '../../assets/icons/icon-location.png';
 import './locationComponent.css';
 
 export default ({ location }) => {
-  if (location.name) {
-    return (
-      <section className="LocationSection">
-        <img className="LocationIcon" src={locationIcon} alt="Location" />
-        <article className="LocationWrapper">
-          <header className="LocationName">{location.name}</header>
-          <section className="PositionWrapper">
-            <p>
-              {/* <span className="PositionIndicator"> &#9673;</span> */}
-              Latitude  {location.latitude}
-            </p>
-            <p>
-              {/* <span className="PositionIndicator"> &#9673;</span> */}
-              Longitude {location.longitude}
-            </p>
-          </section>
-        </article>
-      </section>
-    );
-  }
-  return <span></span>;
+	if (location.name) {
+		return (
+			<section className="LocationSection">
+				<img className="LocationIcon" src={locationIcon} alt="Location" />
+				<article className="LocationWrapper">
+					<header className="LocationName">{location.name}</header>
+					<section className="PositionWrapper">
+						<p>Latitude {location.latitude}</p>
+						<p>Longitude {location.longitude}</p>
+					</section>
+				</article>
+			</section>
+		);
+	}
+	return <span />;
 };

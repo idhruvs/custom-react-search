@@ -16,6 +16,7 @@ export default props => {
 
   return (
     <section className="Search-History-Wrapper">
+      {/* Conditionally rendering the Search History Title when there are items in the historyItems props */}
       {historyItems.length ? (
         <main className="Search-History-Heading-Wrapper">
           <header className="Search-History-Header">Search History</header>
@@ -29,6 +30,7 @@ export default props => {
       ) : (
         <span></span>
       )}
+      {/* Description List rendering the Search history items */}
       <dl className="Search-History-List-Wrapper">
         {historyItems.length ? (
           historyItems.map(item => (
@@ -40,6 +42,7 @@ export default props => {
             </dt>
           ))
         ) : (
+          // Conditionally Rendering the No Search history Exists Notification
           <blockquote> No Search History Exists </blockquote>
         )}
       </dl>

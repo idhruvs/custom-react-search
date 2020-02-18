@@ -1,31 +1,69 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
-import handleAPIErrors from '../../utlis/handleAPIError';
-import debounce from '../../utlis/debounce';
+import handleAPIErrors from '../../utils/handleAPIError';
+import debounce from '../../utils/debounce';
+import hasClickedOutside from '../../utils/hasClickedOutside';
 import constants from '../../constants';
 import { Loader } from '../index';
-import './search.css';
+import './searchComponent.css';
 
 const { search } = constants;
 
 /**
- * Search Component
+ * SearchComponent
  * 1. Includes auto-complete component
  * 2. Includes functionality of making API call to autocomplete API
  * 3. Dispatches the selected search item to the parent component for further operations.
+ * 
+ * @example ./SearchComponent.md
  */
-export default class Search extends Component {
+export default class SearchComponent extends Component {
   constructor(props) {
     super(props);
+    
     this.state = {
       queryText: '',
       suggestions: [],
       isLoaded: true,
       cursor: 0,
-      error: false
+      error: false,
+      
     };
-
+    this.setNodeReference = this.setNodeReference.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
     this.initiateSearch = debounce(this.initiateSearch.bind(this), 500)
+  }
+
+  /**
+ * setNodeReference
+ * Receives the node reference from the Ref API and stores it in the nodeReference attribute of the component.
+ *
+ * @param {node} Node
+ * @public
+ */
+  setNodeReference(node) {
+    this.nodeReference = node;
+  }
+
+  /**
+ * handleClickOutside
+ * Closes the suggestion list when click outside the component is detected.
+ *
+ * @param {event} Event
+ * @public
+ */
+  handleClickOutside(event) {
+    if(hasClickedOutside(event, this.nodeReference)){
+      this.setState({suggestions: [], isLoaded: true})
+    }
+  }
+
+  componentDidMount() {
+    document.addEventListener('mousedown', this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutside);
   }
 
   /**
@@ -50,9 +88,9 @@ export default class Search extends Component {
     }
     if (e.keyCode === 13) {
       const selectedItem = suggestions[cursor];
-      if(selectedItem) {
+      if(selectedItem && selectedItem.id) {
         const queryText =  selectedItem.place_name || selectedItem.text;
-        onSearchItemSelected(selectedItem);
+        onSearchItemSelected(selectedItem)
         this.setState({ queryText, suggestions: [], cursor: 0 });
       }
       
@@ -134,7 +172,7 @@ export default class Search extends Component {
     const { suggestions, cursor, error, isLoaded } = this.state;
 
     return (
-      <section className="Search-wrapper">
+      <section ref={this.setNodeReference} className="Search-wrapper">
         <form
           onSubmit={e => {
             e.preventDefault();
@@ -151,6 +189,8 @@ export default class Search extends Component {
             onKeyDown={e => this.handleKeyDown(e)}
           />
         </form>
+
+        {/* Auto Complete Suggestions List */}
         <ul className="Autocomplete-items">
           {suggestions.map((item, i) => {
             const { place_name, text } = item;
@@ -165,6 +205,9 @@ export default class Search extends Component {
             );
           })}
         </ul>
+        {/*  */}
+
+        {/* API Loader Component */}
         {!isLoaded ? (
           <aside>
             <Loader />
@@ -172,17 +215,20 @@ export default class Search extends Component {
         ) : (
           ''
         )}
+        
+        {/* Section enabled when API Response throws error */}
         {error ? (
           <blockquote>Error in fetching API Response</blockquote>
         ) : (
           <span></span>
         )}
+        {/*  */}
       </section>
     );
   }
 }
 
 
-Search.propTypes = {
+SearchComponent.propTypes = {
   onSearchItemSelected: PropTypes.func.isRequired
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import dayjs from 'dayjs';
 import {
-  Search,
+  SearchComponent,
   LocationComponent,
   SearchHistoryList
 } from './components/index';
@@ -56,12 +56,13 @@ export default class App extends Component {
     }
   };
 
+
   render() {
     const { location, searchHistory } = this.state;
     return (
       <main>
         <section className="Search-section">
-          <Search onSearchItemSelected={this.onSearchItemSelected} />
+          <SearchComponent onSearchItemSelected={this.onSearchItemSelected} />
           <LocationComponent location={location} />
         </section>
         <section className="Search-History-Section">
