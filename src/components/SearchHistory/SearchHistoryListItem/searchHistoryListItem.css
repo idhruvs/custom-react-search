@@ -1,0 +1,46 @@
+.HistoryRow {
+  display: flex;
+  justify-content: space-around;
+  flex: wrap;
+  border-bottom: 1px solid gray;
+}
+
+.btn {
+  border: none;
+  background: transparent;
+  padding: 0;
+  font-size: 24px;
+}
+
+span,
+time,
+button {
+  padding: 0.8em 1.2em;
+  overflow: hidden;
+  width: 100%;
+  flex-basis: 1;
+  box-sizing: border-box;
+  flex-grow: 1;
+}
+
+span {
+  padding-left: 0px;
+}
+
+.HistoryItemName {
+  flex: 7;
+}
+
+.HistoryItemTime {
+  font-size: 12px;
+  flex: 1;
+  padding: 16px 0px;
+}
+
+.HistoryDeleteWrapper {
+  flex: 1;
+}
+
+dl {
+  margin: 0px;
+}
