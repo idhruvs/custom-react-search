@@ -3,6 +3,7 @@
   flex-direction: row;
   margin-top: 5vh;
   width: 400px;
+  align-items: center;
 }
 
 .LocationIcon {
@@ -16,6 +17,7 @@
 
 .LocationName {
   font-size: 18px;
+  padding: 0px 10px;
 }
 
 .PositionWrapper {
@@ -24,8 +26,21 @@
 
 .PositionWrapper p {
   padding: 0px 10px;
+  margin: 5px 0px;
 }
 
 .PositionIndicator {
   padding-right: 16px;
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (max-width: 450px) {
+  .LocationSection {
+    width: 250px;
+    justify-content: center;
+  }
+
+  .LocationIcon {
+    display: none;
+  }
 }

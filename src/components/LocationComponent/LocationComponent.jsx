@@ -11,12 +11,12 @@ export default ({ location }) => {
           <header className="LocationName">{location.name}</header>
           <section className="PositionWrapper">
             <p>
-              <span className="PositionIndicator"> &#9673;</span>
-              {location.latitude}
+              {/* <span className="PositionIndicator"> &#9673;</span> */}
+              Latitude{location.latitude}
             </p>
             <p>
-              <span className="PositionIndicator"> &#9673;</span>
-              {location.longitude}
+              {/* <span className="PositionIndicator"> &#9673;</span> */}
+              Longitude {location.longitude}
             </p>
           </section>
         </article>

@@ -20,6 +20,7 @@ export default class Search extends Component {
 
   handleKeyDown = e => {
     const { cursor, suggestions } = this.state;
+    const { onSearchConfirmed } = this.props;
     if (e.keyCode === 38 && cursor > 0) {
       this.setState(prevState => ({
         cursor: prevState.cursor - 1
@@ -28,6 +29,14 @@ export default class Search extends Component {
       this.setState(prevState => ({
         cursor: prevState.cursor + 1
       }));
+    }
+    if (e.keyCode === 13) {
+      console.log(cursor, suggestions);
+      const selectedItem = suggestions[cursor];
+      const queryText = selectedItem.place_name || selectedItem.text;
+      console.log(selectedItem);
+      onSearchConfirmed(selectedItem);
+      this.setState({ queryText, suggestions: [], cursor: 0 });
     }
   };
 
@@ -41,7 +50,7 @@ export default class Search extends Component {
         .then(res => res.json())
         .then(result => {
           const { features } = result;
-          this.setState({ suggestions: features, isLoaded: true });
+          this.setState({ suggestions: features, isLoaded: true, cursor: 0 });
         })
         .catch(error => {
           this.setState({
@@ -63,7 +72,11 @@ export default class Search extends Component {
 
   onSelect(item) {
     const { onSearchConfirmed } = this.props;
-    this.setState({ suggestions: [] });
+    this.setState({
+      suggestions: [],
+      queryText: item.place_name || item.text,
+      cursor: 0
+    });
     onSearchConfirmed(item);
   }
 
@@ -72,7 +85,11 @@ export default class Search extends Component {
 
     return (
       <section className="Search-wrapper">
-        <form>
+        <form
+          onSubmit={e => {
+            e.preventDefault();
+          }}
+        >
           <input
             type="search"
             className="Input-section"

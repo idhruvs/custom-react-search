@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import './App.css';
+import dayjs from 'dayjs';
 import {
   Search,
   LocationComponent,
   SearchHistoryList
 } from './components/index';
+import './App.css';
 
 export default class App extends Component {
   constructor(props) {
@@ -16,24 +17,29 @@ export default class App extends Component {
   }
 
   onSearchConfirmed = loc => {
-    const { place_name, center } = loc;
+    const { place_name, center, id } = loc;
     const newLoc = {
       latitude: center[0],
       longitude: center[1],
-      name: place_name
+      name: place_name,
+      id
     };
     const { searchHistory } = this.state;
-    const date = new Date();
-    searchHistory.push({ name: place_name, date: date.toDateString() });
+    const date = dayjs().format('YYYY-MM-DD HH:mm');
+    searchHistory.push({ name: place_name, date, id });
     this.setState({ location: newLoc, searchHistory: searchHistory });
   };
 
-  deleteHistoryItem = item => {
-    const { searchHistory } = this.state;
-    const updatedHistory = searchHistory.filter(
-      historyItem => historyItem.name !== item.name
-    );
-    this.setState({ searchHistory: updatedHistory });
+  clearSearchHistory = item => {
+    if (item) {
+      const { searchHistory } = this.state;
+      const updatedHistory = searchHistory.filter(
+        historyItem => historyItem.name !== item.name
+      );
+      this.setState({ searchHistory: updatedHistory });
+    } else {
+      this.setState({ searchHistory: [] });
+    }
   };
 
   render() {
@@ -46,7 +52,7 @@ export default class App extends Component {
         </section>
         <section className="Search-History-Section">
           <SearchHistoryList
-            deleteHistoryItem={item => this.deleteHistoryItem(item)}
+            clearSearchHistory={this.clearSearchHistory}
             historyItems={searchHistory}
           />
         </section>

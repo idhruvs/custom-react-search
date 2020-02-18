@@ -26,9 +26,8 @@
   border-bottom: none;
   border-top: none;
   z-index: 99;
-  top: 100%;
   left: 0;
-  right: -2px;
+  right: -1px;
   max-height: 200px;
   overflow-y: hidden;
   margin-top: 0px;
@@ -60,7 +59,13 @@ aside {
   text-align: center;
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 768px) {
+  .Search-wrapper {
+    min-width: 350px;
+  }
+}
+
+@media only screen and (max-width: 412px) {
   .Search-wrapper {
     min-width: 250px;
   }

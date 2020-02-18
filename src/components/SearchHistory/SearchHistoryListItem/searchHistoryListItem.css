@@ -5,13 +5,6 @@
   border-bottom: 1px solid gray;
 }
 
-.btn {
-  border: none;
-  background: transparent;
-  padding: 0;
-  font-size: 24px;
-}
-
 span,
 time,
 button {
@@ -43,4 +36,10 @@ span {
 
 dl {
   margin: 0px;
+}
+
+@media only screen and (max-width: 768px) {
+  .HistoryItemName {
+    flex: 3;
+  }
 }
