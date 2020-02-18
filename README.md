@@ -26,11 +26,17 @@
    - Component Type: Functional Component
    - Pure CSS Loader inspired from https://loading.io/css
 
-4. SearchHistoryListComponent
+4. `SearchHistoryListComponent`
   - Component Type: Functional Component
   - Renders the search-history list provided to the component in props.
   - Dispatches clearHistory action to parent component for deleting a search-history-item.
 
+5. `DeleteButton`
+  - Delete button as per requirements set in the evaluation
+  - Solution: `https://react-custom-delete.stackblitz.io`
+  - Source Code: `https://stackblitz.com/edit/react-custom-delete`
+  
+   
 #### Utils
 
 1. `debounce`
