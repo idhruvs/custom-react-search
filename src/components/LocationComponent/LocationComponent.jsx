@@ -12,7 +12,7 @@ export default ({ location }) => {
           <section className="PositionWrapper">
             <p>
               {/* <span className="PositionIndicator"> &#9673;</span> */}
-              Latitude{location.latitude}
+              Latitude  {location.latitude}
             </p>
             <p>
               {/* <span className="PositionIndicator"> &#9673;</span> */}

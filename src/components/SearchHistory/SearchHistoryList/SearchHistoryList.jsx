@@ -1,8 +1,16 @@
 import React from 'react';
-
 import SearchHistoryListItem from '../SearchHistoryListItem/SearchHistoryListItem';
 import './searchHistoryList.css';
 
+
+/**
+ * Search Component [Stateless Component]
+ * 1. Renders the search history-list
+ * 2. Dispatches items to clearHistory to the parent component
+ * 
+ * @prop { historyItems } Object
+ * @prop { clearSearchHistory } Function
+ */
 export default props => {
   const { historyItems, clearSearchHistory } = props;
 
@@ -32,7 +40,7 @@ export default props => {
             </dt>
           ))
         ) : (
-          <blockquote> No History </blockquote>
+          <blockquote> No Search History Exists </blockquote>
         )}
       </dl>
     </section>

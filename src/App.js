@@ -16,25 +16,39 @@ export default class App extends Component {
     };
   }
 
-  onSearchConfirmed = loc => {
-    const { place_name, center, id } = loc;
+  /**
+ * onSearchItemSelected
+ * Associated with search-item selection functionality
+ * Updates the searchHistory with new searchItems.
+ * 
+ * @param { searchItem } MapboxFeatureObject
+ */
+  onSearchItemSelected = searchItem => {
+    const { place_name, center, id } = searchItem;
     const newLoc = {
       latitude: center[0],
       longitude: center[1],
-      name: place_name,
-      id
+      name: place_name
     };
     const { searchHistory } = this.state;
-    const date = dayjs().format('YYYY-MM-DD HH:mm');
-    searchHistory.push({ name: place_name, date, id });
+    const date = dayjs().format('YYYY-MM-DD HH:mm:ss');
+    searchHistory.push({ name: place_name, date, id : `${id}-${new Date().getTime()}`});
     this.setState({ location: newLoc, searchHistory: searchHistory });
   };
 
+
+  /**
+   * clearSearchHistory
+   * Clears the search history based on the item provided in the arguement
+   * If the item provided in the arguement is null, it clears all the history stored in the state.
+   * 
+   * @param { item } MapboxFeatureObject || null
+   */
   clearSearchHistory = item => {
     if (item) {
       const { searchHistory } = this.state;
       const updatedHistory = searchHistory.filter(
-        historyItem => historyItem.name !== item.name
+        historyItem => historyItem.id !== item.id
       );
       this.setState({ searchHistory: updatedHistory });
     } else {
@@ -47,7 +61,7 @@ export default class App extends Component {
     return (
       <main>
         <section className="Search-section">
-          <Search onSearchConfirmed={this.onSearchConfirmed} />
+          <Search onSearchItemSelected={this.onSearchItemSelected} />
           <LocationComponent location={location} />
         </section>
         <section className="Search-History-Section">

@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 import handleAPIErrors from '../../utlis/handleAPIError';
 import debounce from '../../utlis/debounce';
 import constants from '../../constants';
 import { Loader } from '../index';
 import './search.css';
+
 const { search } = constants;
 
+/**
+ * Search Component
+ * 1. Includes auto-complete component
+ * 2. Includes functionality of making API call to autocomplete API
+ * 3. Dispatches the selected search item to the parent component for further operations.
+ */
 export default class Search extends Component {
   constructor(props) {
     super(props);
@@ -16,11 +24,21 @@ export default class Search extends Component {
       cursor: 0,
       error: false
     };
+
+    this.initiateSearch = debounce(this.initiateSearch.bind(this), 500)
   }
 
-  handleKeyDown = e => {
+  /**
+ * handleKeyDown
+ * Provides functionality to visualize selection of auto-complete suggestions
+ * Listens to the keyDown event on the input element.
+ *
+ * @param {event} Event
+ * @public
+ */
+  handleKeyDown(e) {
     const { cursor, suggestions } = this.state;
-    const { onSearchConfirmed } = this.props;
+    const { onSearchItemSelected } = this.props;
     if (e.keyCode === 38 && cursor > 0) {
       this.setState(prevState => ({
         cursor: prevState.cursor - 1
@@ -31,16 +49,25 @@ export default class Search extends Component {
       }));
     }
     if (e.keyCode === 13) {
-      console.log(cursor, suggestions);
       const selectedItem = suggestions[cursor];
-      const queryText = selectedItem.place_name || selectedItem.text;
-      console.log(selectedItem);
-      onSearchConfirmed(selectedItem);
-      this.setState({ queryText, suggestions: [], cursor: 0 });
+      if(selectedItem) {
+        const queryText =  selectedItem.place_name || selectedItem.text;
+        onSearchItemSelected(selectedItem);
+        this.setState({ queryText, suggestions: [], cursor: 0 });
+      }
+      
     }
   };
 
-  initiateSearch = queryText => {
+  /**
+ * initiateSearch
+ * Initiates a search for queryText provided in the arguement.
+ * Executed whenever a user enters text in the input element.
+ *
+ * @param {queryText} String
+ * @public
+ */
+  initiateSearch(queryText)  {
     if (queryText) {
       const cachebuster = new Date().getTime();
       fetch(
@@ -50,6 +77,9 @@ export default class Search extends Component {
         .then(res => res.json())
         .then(result => {
           const { features } = result;
+          if(features.length === 0){
+            features.push({text: 'No Suggestions Found', id: null})
+          }
           this.setState({ suggestions: features, isLoaded: true, cursor: 0 });
         })
         .catch(error => {
@@ -64,21 +94,41 @@ export default class Search extends Component {
     }
   };
 
-  handleChange(e) {
-    const queryText = e.target.value;
-    this.setState({ queryText });
-    this.initiateSearch(e.target.value);
+
+ /**
+ * handleChange
+ * Monitors the input element for any change-event and initiates search on a valid query text.
+ * Listens to the onChange event on the input element.
+ *
+ * @param {event} Event
+ * @public
+ */
+  handleChange(event) {
+    const queryText = event.target.value;
+    this.setState({ queryText , isLoaded: false});
+    this.initiateSearch(event.target.value);
   }
 
+   /**
+ * onSelect
+ * Records the selected item from the suggestions list and dispatches it to the onSearchItemSelected function
+ *
+ * @param {item} MapboxFeatureObject
+ * @public
+ */
   onSelect(item) {
-    const { onSearchConfirmed } = this.props;
-    this.setState({
-      suggestions: [],
-      queryText: item.place_name || item.text,
-      cursor: 0
-    });
-    onSearchConfirmed(item);
+    const { onSearchItemSelected } = this.props;
+    if(item.id !== null){
+      this.setState({
+        suggestions: [],
+        queryText: item.place_name || item.text,
+        cursor: 0
+      });
+      onSearchItemSelected(item);
+    }
+    
   }
+
 
   render() {
     const { suggestions, cursor, error, isLoaded } = this.state;
@@ -98,7 +148,7 @@ export default class Search extends Component {
             label="Search Query"
             value={this.state.queryText}
             onChange={e => this.handleChange(e)}
-            onKeyDown={this.handleKeyDown}
+            onKeyDown={e => this.handleKeyDown(e)}
           />
         </form>
         <ul className="Autocomplete-items">
@@ -130,4 +180,9 @@ export default class Search extends Component {
       </section>
     );
   }
+}
+
+
+Search.propTypes = {
+  onSearchItemSelected: PropTypes.func.isRequired
 }
