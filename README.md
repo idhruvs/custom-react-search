@@ -7,7 +7,7 @@
     - Runs the code in development mode.
 
 2. `npm run build`
-    - Builds the UI source code and stores the result in `dist` folder
+    - Builds the UI source code and stores the result in `build` folder
 
 #### Components
 
@@ -43,3 +43,8 @@
 
 3. `hasClickedOutside`
     - Utility to check if 'clickevent' has occurred outside the DOM Node whose reference is passed as arguement     to the function.
+
+
+### Notes:
+
+1. The current application-funcationality is developed around the auto-complete feature keeping in mind the requirement. Hence the suggestions only popup when there is a 'change' in the input text. 

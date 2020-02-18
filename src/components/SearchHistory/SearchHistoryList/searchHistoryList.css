@@ -1,37 +1,41 @@
 .Search-History-Wrapper {
-  margin: 16px;
+	margin: 16px;
 }
 
 .Search-History-Heading-Wrapper {
-  display: flex;
+	display: flex;
 }
 
 .Search-History-Header {
-  font-size: 1.2rem;
-  padding: 10px 0px;
-  flex: 8;
+	font-size: 1.2rem;
+	padding: 10px 0px;
+	flex: 8;
 }
 
 .History-Clear-Action {
-  flex: 2;
-  color: gray;
-  text-align: right;
+	flex: 2;
+	color: gray;
+	text-align: right;
 }
 
 .Search-History-List-Wrapper {
-  overflow: hidden;
-  height: 25vh;
+	overflow: scroll;
+	height: 25vh;
 }
 
 @media only screen and (max-width: 768px) {
-  .Search-History-Header {
-    flex: 5;
-  }
+	.Search-History-Header {
+		flex: 5;
+	}
 }
 
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
-  .Search-History-Header {
-    flex: 4;
-  }
+	.Search-History-Header {
+		flex: 4;
+	}
+
+	.Search-History-Wrapper {
+		margin: 16px 0px;
+	}
 }

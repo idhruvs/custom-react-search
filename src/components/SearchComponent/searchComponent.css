@@ -1,76 +1,76 @@
 .Search-wrapper {
-  min-width: 400px;
-  position: relative;
+	min-width: 400px;
+	position: relative;
 }
 
 .Input-section {
-  font-size: 16px;
-  padding: 10px;
-  width: 100%;
-  border: none;
+	font-size: 16px;
+	padding: 10px;
+	width: 100%;
+	border: none;
 }
 
 .Input-section::placeholder {
-  color: gray;
+	color: gray;
 }
 
 .Input-section:focus {
-  outline: none !important;
+	outline: none !important;
 }
 
 .Autocomplete-items {
-  list-style: none;
-  padding: 0;
-  position: absolute;
-  border: 1px solid #d4d4d4;
-  border-bottom: none;
-  border-top: none;
-  z-index: 99;
-  left: 0;
-  right: -1px;
-  max-height: 200px;
-  overflow-y: hidden;
-  margin-top: 0px;
+	list-style: none;
+	padding: 0;
+	position: absolute;
+	border: 1px solid #d4d4d4;
+	border-bottom: none;
+	border-top: none;
+	z-index: 99;
+	left: 0;
+	right: 0px;
+	max-height: 300px;
+	overflow-y: hidden;
+	margin-top: 0px;
 }
 
 .Autocomplete-items li {
-  padding: 10px;
-  text-align: left;
-  cursor: pointer;
-  background-color: #fff;
-  border-bottom: 1px solid #d4d4d4;
+	padding: 10px;
+	text-align: left;
+	cursor: pointer;
+	background-color: #fff;
+	border-bottom: 1px solid #d4d4d4;
 }
 
 .Autocomplete-items div:hover {
-  background-color: #e9e9e9;
+	background-color: #e9e9e9;
 }
 
 .active {
-  background-color: DodgerBlue !important;
-  color: #ffffff;
+	background-color: DodgerBlue !important;
+	color: #ffffff;
 }
 
 blockquote {
-  text-align: center;
+	text-align: center;
 }
 
 aside {
-  padding-top: 16px;
-  text-align: center;
+	padding-top: 16px;
+	text-align: center;
 }
 
 @media only screen and (max-width: 768px) {
-  .Search-wrapper {
-    min-width: 350px;
-  }
+	.Search-wrapper {
+		min-width: 350px;
+	}
 }
 
 @media only screen and (max-width: 412px) {
-  .Search-wrapper {
-    min-width: 250px;
-  }
+	.Search-wrapper {
+		min-width: 250px;
+	}
 
-  .Input-section {
-    font-size: 12px;
-  }
+	.Input-section {
+		font-size: 12px;
+	}
 }

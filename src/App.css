@@ -1,39 +1,40 @@
 .App {
-  text-align: center;
+	text-align: center;
 }
 
 .Search-section {
-  background: #e6dada; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #274046,
-    #e6dada
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #274046,
-    #e6dada
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	background: #e6dada; /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #274046, #e6dada); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(
+		to right,
+		#274046,
+		#e6dada
+	); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 15vh 40px 40px 40px;
-  min-height: 40vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 15vh 40px 40px 40px;
+	min-height: 40vh;
 }
 
 .Search-History-Section {
-  padding: 2rem 8rem;
+	padding: 2rem 8rem;
 }
-
 
 button {
-  cursor: pointer;
+	cursor: pointer;
 }
-button:focus {outline:0;}
+button:focus {
+	outline: 0;
+}
 
 @media only screen and (max-width: 768px) {
-  .Search-History-Section {
-    padding: 0.8rem 1.2rem;
-  }
+	.Search-History-Section {
+		padding: 0.8rem 1.2rem;
+	}
+
+	.btn {
+		font-size: 0.8rem;
+	}
 }

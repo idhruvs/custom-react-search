@@ -1,48 +1,51 @@
 .HistoryRow {
-  display: flex;
-  justify-content: space-around;
-  flex: wrap;
-  border-bottom: 1px solid gray;
+	display: flex;
+	justify-content: space-around;
+	flex: wrap;
+	border-bottom: 1px solid gray;
 }
 
 span,
 button {
-  padding: 0.8em 1.2em;
-  overflow: hidden;
-  width: 100%;
-  flex-basis: 1;
-  box-sizing: border-box;
-  flex-grow: 1;
-}
-
-time {
-  flex: 2
+	padding: 0.8em 1.2em;
+	overflow: hidden;
+	width: 100%;
+	flex-basis: 1;
+	box-sizing: border-box;
+	flex-grow: 1;
 }
 
 span {
-  padding-left: 0px;
+	padding-left: 0px;
 }
 
 .HistoryItemName {
-  flex: 7;
+	flex: 7;
+	font-size: 1rem;
 }
 
 .HistoryItemTime {
-  font-size: 12px;
-  flex: 1;
-  padding: 16px 0px;
+	font-size: 12px;
+	flex: 1;
+	padding: 16px 0px;
 }
 
 .HistoryDeleteWrapper {
-  flex: 1;
+	flex: 1;
 }
 
 dl {
-  margin: 0px;
+	margin: 0px;
 }
 
 @media only screen and (max-width: 768px) {
-  .HistoryItemName {
-    flex: 3;
-  }
+	.HistoryItemName {
+		flex: 3;
+		font-size: 0.8rem;
+	}
+
+	.HistoryItemTime {
+		flex: 2;
+		font-size: 0.6rem;
+	}
 }

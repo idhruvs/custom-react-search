@@ -182,8 +182,8 @@ export default class SearchComponent extends Component {
             type="search"
             className="Input-section"
             placeholder="Enter a place name to search"
-            name="search-query"
-            label="Search Query"
+            name="search"
+            aria-label="Search"
             value={this.state.queryText}
             onChange={e => this.handleChange(e)}
             onKeyDown={e => this.handleKeyDown(e)}
@@ -191,11 +191,12 @@ export default class SearchComponent extends Component {
         </form>
 
         {/* Auto Complete Suggestions List */}
-        <ul className="Autocomplete-items">
+        <ol role="listbox" className="Autocomplete-items">
           {suggestions.map((item, i) => {
             const { place_name, text } = item;
             return (
               <li
+                role="presentation"
                 className={cursor === i ? 'active' : null}
                 onClick={() => this.onSelect(item)}
                 key={place_name || text}
@@ -204,7 +205,7 @@ export default class SearchComponent extends Component {
               </li>
             );
           })}
-        </ul>
+        </ol>
         {/*  */}
 
         {/* API Loader Component */}
